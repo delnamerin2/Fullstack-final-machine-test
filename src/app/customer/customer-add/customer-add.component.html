@@ -1,0 +1,117 @@
+<p>customer-add works!</p>
+<div class="container">
+    <h3>New Customer</h3>
+    <hr />
+    <!-- template driven form -->
+    <form name="frmEmployee" #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
+      <!-- Employee ID hidden -->
+      <div class="form-group">
+        <input
+          type="hidden"
+          readonly
+          name="id"
+          [(ngModel)]="employeeService.formEmployeeData.id"
+        />
+      </div>
+  
+      <!-- Customer Name -->
+      <div class="form-group">
+        <label>Employee Name</label>
+        <input
+          name="customerName"
+          #employeeName="ngModel"
+          [(ngModel)]="employeeService.formEmployeeData.employeeName"
+          class="form-control"
+          placeholder="Enter the Customer Name"
+          minlength="3"
+          maxlength="25"
+          required
+          [ngClass]="{
+            'is-invalid': CustomerName.touched && customerName.invalid
+          }"
+        />
+  
+        <!-- validation Error Message -->
+        <div
+          class="validation-error"
+          *ngIf="customerName.touched && customerName.invalid"
+        >
+          <div *ngIf="customerName.errors.required">
+            Customer Name is invalid or required!
+          </div>
+        </div>
+      </div>
+  
+      <!--Customer Address-->
+      <div class="form-group">
+        <label>Customer Address</label>
+        <input
+          name="Address"
+          type="text"
+          #designation="ngModel"
+          [(ngModel)]="customerService.formCustomerData.Address"
+          class="form-control"
+          placeholder="Enter the customer Address"
+          minlength="3"
+          maxlength="25"
+          required
+          [ngClass]="{
+            'is-invalid': Address.touched && Address.invalid
+          }"
+        />
+
+        <!--customer email-->
+        <div class="form-group">
+            <label>Customer Email</label>
+            <input
+              name="Email"
+              type="text"
+              #Email="ngModel"
+              [(ngModel)]="customerService.formCustomerData.Address"
+              class="form-control"
+              placeholder="Enter the customer Email"
+              minlength="3"
+              maxlength="25"
+              required
+              [ngClass]="{
+                'is-invalid': Email.touched && Email.invalid
+              }"
+            />
+  
+            <!-- loantype -->
+             <!-- AssetType Name -->
+    <div class="form-group">
+        <label>LoanType Name</label>
+        <select
+          name="LoanTypeId"
+          id="LoanTypeId"
+          #LoanType="ngModel"
+          [(ngModel)]="customerService.formAssetData.LoanTypeId"
+          class="form-control"
+        >
+          <option value="0" selected disabled>
+            ---Select Loan Type-----------
+          </option>
+          <option
+            *ngFor="let loanitem of customerService.loan"
+            value="{{ loanitem.LoanTypeId }}"
+          >
+            {{ loanitem.Type }}
+          </option>
+        </select>
+      </div>
+
+
+      <!-- submit button -->
+      <div class="form-group">
+        <button
+          type="submit"
+          class="btn btn-lg btn-primary form-control"
+          [disabled]="!(form.valid && form.dirty)"
+        >
+          INSERT
+        </button>
+      </div>
+    </form>
+  </div>
+  
